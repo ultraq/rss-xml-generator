@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:th="http://www.thymeleaf.org"
+	version="2.0">
+	<channel>
+		<title th:text="${channel.title}"></title>
+		<link th:text="${channel.link}"></link>
+		<description th:text="${channel.description}"></description>
+		<atom:link th:if="${channel.atomSelfLink}" th:href="${channel.atomSelfLink}" rel="self" type="application/rss+xml"/>
+		<language th:if="${channel.language}" th:text="${channel.language}"></language>
+		<pubDate>[[${#joda.format(pubDate, DATE_FORMAT_RFC822)}]]</pubDate>
+		<lastBuildDate>[[${#joda.format(lastBuildDate, DATE_FORMAT_RFC822)}]]</lastBuildDate>
+		<generator>RSS XML Generator - https://github.com/ultraq/rss-xml-generator</generator>
+		<docs>http://www.rssboard.org/rss-specification</docs>
+		<ttl th:if="${channel.ttl}" th:text="${channel.ttl}"></ttl>
+		<image th:if="${channel.image}" th:with="image=${channel.image}">
+			<url th:text="${image.url}"></url>
+			<title th:text="${image.title}"></title>
+			<link th:text="${image.link}"></link>
+		</image>
+		<item th:each="item: ${items}">
+			<title th:utext="${#rss.generateCDATASection(item.title)}">Item title</title>
+			<link>[[${item.guid}]]</link>
+			<dc:creator>Emanuel Rabina</dc:creator>
+			<description th:utext="${#rss.generateCDATASection(item.description)}">
+				Item description
+			</description>
+			<guid>[[${item.guid}]]</guid>
+			<pubDate>[[${#joda.formatRFC822Date(item.date)}]]</pubDate>
+		</item>
+	</channel>
+</rss>

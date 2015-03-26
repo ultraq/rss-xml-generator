@@ -1,0 +1,29 @@
+/**
+ * Gradle build script for the RSS XML Generator project.
+ * 
+ * @author Emanuel Rabina
+ */
+
+apply plugin: 'groovy'
+apply plugin: 'maven'
+apply from: 'https://raw.github.com/ultraq/gradle-support/1.1/gradle-support.gradle'
+apply from: 'https://raw.github.com/ultraq/gradle-support/1.1/maven-support.gradle'
+apply from: 'https://raw.github.com/ultraq/gradle-support/1.1/bundle.gradle'
+
+//project.name = 'RSS XML Generator'
+project.description = 'Generate an XML document for an RSS feed'
+project.archivesBaseName = 'rss-xml-generator'
+project.sourceCompatibility = '1.7'
+
+project.group    = 'nz.net.ultraq.rss'
+project.artifact = 'rss-xml-generator'
+project.version  = '1.0.0-SNAPSHOT'
+project.year     = '2015'
+
+dependencies {
+	compile(
+		'nz.net.ultraq.thymeleaf:thymeleaf-joda-dialect:1.0.0-SNAPSHOT',
+		'org.codehaus.groovy:groovy:2.3.7',
+		'org.thymeleaf:thymeleaf:2.1.4.RELEASE'
+	)
+}
