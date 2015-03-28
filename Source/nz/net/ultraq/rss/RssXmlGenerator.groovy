@@ -18,30 +18,28 @@ package nz.net.ultraq.rss
 
 import nz.net.ultraq.rss.model.Channel
 import nz.net.ultraq.rss.model.Item
+import nz.net.ultraq.thymeleaf.IfNotNullDialect
 import nz.net.ultraq.thymeleaf.JodaDialect
-import org.joda.time.DateTime
 import org.thymeleaf.TemplateEngine
 import org.thymeleaf.context.Context
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver
-
-import groovy.transform.Immutable
 
 /**
  * Class to generate an RSS XML document using a Thymeleaf template.
  * 
  * @author Emanuel Rabina
  */
-@Immutable
 class RssXmlGenerator {
 
-	private static final TemplateEngine templateEngine
+	private static final String DATE_FORMAT_RFC822  = 'EEE, dd MMM yyyy HH:mm:ss Z'
 
-	private Channel channel
+	private final TemplateEngine templateEngine
 
 	/**
 	 * Initialize a new Thymeleaf template engine for the generator.
 	 */
-	static {
+	RssXmlGenerator() {
+
 		templateEngine = new TemplateEngine(
 			templateResolver: new ClassLoaderTemplateResolver(
 				templateMode:      'XML',
@@ -49,6 +47,7 @@ class RssXmlGenerator {
 				characterEncoding: 'UTF-8'
 			),
 			additionalDialects: [
+				new IfNotNullDialect(),
 				new JodaDialect(),
 				new RssDialect()
 			]
@@ -56,24 +55,21 @@ class RssXmlGenerator {
 	}
 
 	/**
-	 * Generate an RSS XML document with the following items.
+	 * Generate an RSS XML document for the given channel and items.
 	 * 
-	 * @param items  List of items to include in the feed.
-	 * @param writer Output channel to write the XML document to.
+	 * @param channel RSS channel information.
+	 * @param items   List of items to include in the feed.
+	 * @param writer  Output stream to write the XML document to.
 	 */
-	void generate(List<Item> items, Writer writer) {
-
-		// Ensure items sorted from latest to oldest
-		def sortedItems = items.sort({ item1, item2 ->
-			return item2.pubDate <=> item1.pubDate
-		})
+	void generate(Channel channel, List<Item> items, Writer writer) {
 
 		templateEngine.process('Template.xml', new Context(
 			variables: [
-				channel:       channel,
-				items:         sortedItems,
-				pubDate:       sortedItems.first().pubDate,	// TODO: Allow passed-in publication date?
-				lastBuildDate: new DateTime()
+				DATE_FORMAT_RFC822: DATE_FORMAT_RFC822,
+				channel: channel,
+				items: items.sort({ item1, item2 ->
+					return item2.pubDate <=> item1.pubDate
+				})
 			]
 		), writer)
 	}

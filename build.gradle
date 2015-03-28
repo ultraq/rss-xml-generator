@@ -22,7 +22,8 @@ project.year     = '2015'
 
 dependencies {
 	compile(
-		'nz.net.ultraq.thymeleaf:thymeleaf-joda-dialect:1.0.0-SNAPSHOT',
+		'nz.net.ultraq.thymeleaf:thymeleaf-ifnotnull-dialect:1.0.0-SNAPSHOT',
+		'nz.net.ultraq.thymeleaf:thymeleaf-joda-dialect:1.0.1-SNAPSHOT',
 		'org.codehaus.groovy:groovy:2.3.7',
 		'org.thymeleaf:thymeleaf:2.1.4.RELEASE'
 	)
