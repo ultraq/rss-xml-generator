@@ -8,15 +8,10 @@ Generate an XML document for an RSS feed.
  - Released: ?? ??? ????
 
 
-Requirements
-------------
-
- - Java 7
- - Thymeleaf 2.1 (2.1.4 and its dependencies included)
-
-
 Installation
 ------------
+
+Minimum of Java 7 required.
 
 ### Standalone distribution
 Copy the JAR from [the latest release bundle](https://github.com/ultraq/rss-xml-generator/releases),
@@ -34,42 +29,37 @@ Add a dependency to your project with the following co-ordinates:
 Usage
 -----
 
-Create an instance of the `RssXmlGenerator` for every RSS Channel you wish to
-serve.
+Create an instance of the `RssXmlGenerator`.  Then, whenever you need to create
+an RSS feed, provide a `Channel` (describes the RSS channel) and list of `Item`s
+(describes the things to publish) to the `generate` method.  You'll also need a
+`Writer` so that the generated XML has somewhere to go to.
 
 ```groovy
-RssXmlGenerator rssXmlGenerator = new RssXmlGenerator(
-  channel: new Channel(
-    title:        'My Website News and Updates',
-    link:         'http://www.mywebsite.com/',
-    description:  'All of the latest stuff from My Website',
-    atomSelfLink: 'http://www.mywebsite.com/rss/',
-    image: new Image(
-      url:   'http://www.mywebsite.com/images/website-icon.png',
-      title: 'My Website',
-      link:  'http://www.mywebsite.com/'
-    )
+def channel = new Channel(
+  title:       'My Website News and Updates',
+  link:        'http://www.mywebsite.com/',
+  description: 'All of the latest stuff from My Website',
+  image: new Image(
+    url:   'http://www.mywebsite.com/images/website-icon.png',
+    title: 'My Website News and Updates',
+    link:  'http://www.mywebsite.com/'
   )
 )
-```
+def items = [
+  new Item(
+    title: 'My awesome blog post',
+    link:  'http://www.mywebsite.com/blog/awesome'
+  ),
+  ...
+]
+def output = new StringWriter()
 
-Then, whenever you wish to generate an RSS XML document, call the `generate`
-method, passing in the channel items you wish to have generated at this time,
-and a `Writer` to output the document to.
-
-```groovy
-def items = new ArrayList<Item>()
-items.push(new Item(
-  title:       'Item 1',
-  link:        'http://www.mywebsite.com/item-1/',
-  description: 'A long time ago, in a galaxy far far away...'  
-))
-
-rssXmlGenerator.generate(items, response.writer)
+def rssXmlGenerator = new RssXmlGenerator()
+rssXmlGenerator.generate(channel, items, output)
 ```
 
 > The example code above populates the minimum fields required by RSS.  There
-> are plenty more properties in the Channel, Image, and Item.  Check out
+> are plenty more properties in the Channel, Image, and Item objects.  Check out
 > [the RSS spec](http://www.rssboard.org/rss-specification) for all the
 > available properties.
 
