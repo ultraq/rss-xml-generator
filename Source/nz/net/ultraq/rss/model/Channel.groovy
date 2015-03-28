@@ -16,14 +16,16 @@
 
 package nz.net.ultraq.rss.model
 
-import groovy.transform.Immutable
+import org.joda.time.DateTime
+
+import groovy.transform.Canonical
 
 /**
  * Representation of the largely static parts of an RSS channel.
  * 
  * @author Emanuel Rabina
  */
-@Immutable
+@Canonical
 class Channel {
 
 	// Required fields
@@ -36,6 +38,19 @@ class Channel {
 
 	// Optional fields
 	String language
+	String copyright
+//	String managingEditor	// TODO
+//	String webMaster		// TODO
+	DateTime pubDate
+	DateTime lastBuildDate
+//	Category[] categories	// TODO
+//	String generator		// NOTE: Hardcoded
+//	String docs				// NOTE: Hardcoded
+//	Cloud cloud				// TODO
 	int ttl
 	Image image
+//	Rating rating			// NOTE: No longer relevant?
+//	TextInput textInput		// NOTE: no longer relevant?
+//	SkipHour[] skipHours	// TODO
+//	SkipDay[] skipDays		// TODO
 }

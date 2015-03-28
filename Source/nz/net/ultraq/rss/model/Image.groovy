@@ -16,16 +16,17 @@
 
 package nz.net.ultraq.rss.model
 
-import groovy.transform.Immutable
+import groovy.transform.Canonical
 
 /**
  * Representation of an image to accompany the RSS feed.
  * 
  * @author Emanuel Rabina
  */
-@Immutable
+@Canonical
 class Image {
 
+	// Required fields
 	String url
 	String title
 	String link

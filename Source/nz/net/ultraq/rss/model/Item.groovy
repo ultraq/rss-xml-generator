@@ -16,7 +16,7 @@
 
 package nz.net.ultraq.rss.model
 
-//import groovy.transform.Immutable
+import groovy.transform.Canonical
 import org.joda.time.DateTime
 
 /**
@@ -24,7 +24,7 @@ import org.joda.time.DateTime
  * 
  * @author Emanuel Rabina
  */
-//@Immutable
+@Canonical
 class Item {
 
 	// Required fields
@@ -37,5 +37,5 @@ class Item {
 	// Optional fields
 	String description
 	String guid
-	DateTime pubDate	// TODO: This is preventing the class from becoming immutable
+	DateTime pubDate
 }
