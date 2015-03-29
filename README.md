@@ -4,8 +4,8 @@ RSS XML Generator
 
 Generate an XML document for an RSS feed.
 
- - Current version: 1.0.0-SNAPSHOT
- - Released: ?? ??? ????
+ - Current version: 1.0.0
+ - Released: 29 March 2013
 
 
 Installation
@@ -23,7 +23,7 @@ Add a dependency to your project with the following co-ordinates:
 
  - GroupId: `nz.net.ultraq.rss`
  - ArtifactId: `rss-xml-generator`
- - Version: `1.0.0-SNAPSHOT`
+ - Version: `1.0.0`
 
 
 Usage
