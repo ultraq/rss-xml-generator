@@ -27,7 +27,7 @@
 			<dc:creator ifnotnull:text="*{dcCreator}"></dc:creator>
 			<description ifnotnull:utext="${#rss.generateCDATASection(item.description)}"></description>
 			<guid ifnotnull:text="${item.guid}"></guid>
-			<pubDate ifnotnull:text="${#joda.formatRFC822Date(item.date)}"></pubDate>
+			<pubDate ifnotnull:text="${#joda.format(item.pubDate, DATE_FORMAT_RFC822)}"></pubDate>
 		</item>
 	</channel>
 </rss>
