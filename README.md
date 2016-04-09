@@ -5,7 +5,7 @@ RSS XML Generator
 Generate an XML document for an RSS feed.
 
  - Current version: 1.0.0
- - Released: 29 March 2013
+ - Released: 29 March 2015
 
 
 Installation
