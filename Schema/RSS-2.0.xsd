@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	RSS 2.0 schema
+	==============
+
+	This schema is much like the RSS 2.0 schema written by Jorgen Thelin
+	(available at http://www.codeplex.com/rss2schema/).
+
+	This version is created for personal use on my Final MooCow website to
+	generate RSS feeds from existing content, and is made to be more JAXB
+	friendly with respect to the generated classes.
+-->
+
+<xsd:schema targetNamespace="http://www.rssboard.org/rss-specification"
+	xmlns="http://www.rssboard.org/rss-specification"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" jxb:version="1.0" jxb:extensionBindingPrefixes="xjc"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<!-- RSS root element -->
+	<xsd:element name="rss">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="channel" type="Channel"/>
+				<xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="version" type="xsd:decimal" default="2.0"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- RSS channel -->
+	<xsd:complexType name="Channel">
+		<xsd:sequence>
+
+			<!-- Compulsory elements -->
+			<xsd:element name="title" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						The name of the channel. It's how people refer to your service. If you have
+						an HTML website that contains the same information as your RSS file, the
+						title of your channel should be the same as the title of your website.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="link" type="xsd:anyURI">
+				<xsd:annotation>
+					<xsd:documentation>
+						The URL to the HTML website corresponding to the channel.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="description" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						Phrase or sentence describing the channel.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Optional elements -->
+			<xsd:element name="language" type="xsd:language" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						The language the channel is written in. This allows aggregators to group
+						all Italian language sites, for example, on a single page. A list of
+						allowable values for this element, as provided by Netscape, is here
+						(http://cyber.law.harvard.edu/rss/languages.html). You may also use values
+						defined (http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes) by
+						the W3C.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="copyright" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						Copyright notice for content in the channel.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="managingEditor" type="EmailAddress" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						Email address for person responsible for editorial content.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="webMaster" type="EmailAddress" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						Email address for person responsible for technical issues relating to
+						channel.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="pubDate" type="RFC822_DateTimeSpec" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						The publication date for the content in the channel. For example, the New
+						York Times publishes on a daily basis, the publication date flips once
+						every 24 hours. That's when the pubDate of the channel changes. All
+						date-times in RSS conform to the Date and Time Specification of RFC 822
+						(http://asg.web.cmu.edu/rfc/rfc822.html), with the exception that the year
+						may be expressed with two characters or four characters (four preferred).
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="lastBuildDate" type="RFC822_DateTimeSpec" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						The last time the content of the channel changed.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="category" type="Category" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						Specify one or more categories that the channel belongs to. Follows the
+						same rules as the &lt;item&gt;-level category 
+						(http://cyber.law.harvard.edu/rss/rss.html#ltcategorygtSubelementOfLtitemgt)
+						element. More info (http://cyber.law.harvard.edu/rss/rss.html#syndic8).
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="generator" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						A string indicating the program used to generate the channel.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="docs" type="xsd:anyURI" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						A URL that points to the documentation for the format used in the RSS file.
+						It's probably a pointer to this page. It's for people who might stumble
+						across an RSS file on a Web server 25 years from now and wonder what it is.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="cloud" type="Cloud" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						Allows processes to register with a cloud to be notified of updates to the
+						channel, implementing a lightweight publish-subscribe protocol for RSS
+						feeds. More info here
+						(http://cyber.law.harvard.edu/rss/rss.html#ltcloudgtSubelementOfLtchannelgt).
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ttl" type="xsd:nonNegativeInteger" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						ttl stands for time to live. It's a number of minutes that indicates how
+						long a channel can be cached before refreshing from the source. More info
+						here (http://cyber.law.harvard.edu/rss/rss.html#ltttlgtSubelementOfLtchannelgt).
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="image" type="Image" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						Specifies a GIF, JPEG or PNG image that can be displayed with the channel.
+						More info here (http://cyber.law.harvard.edu/rss/rss.html#ltimagegtSubelementOfLtchannelgt).
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="rating" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						The PICS (http://www.w3.org/PICS/) rating for the channel.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="textInput" type="TextInput" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						Specifies a text input box that can be displayed with the channel. More
+						info here (http://cyber.law.harvard.edu/rss/rss.html#lttextinputgtSubelementOfLtchannelgt).	
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="skipHours" type="SkipHours" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						A hint for aggregators telling them which hours they can skip. More info
+						here (http://cyber.law.harvard.edu/rss/skipHoursDays.html#skiphours).
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="skipDays" type="SkipDays" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						A hint for aggregators telling them which days they can skip. More info
+						here (http://cyber.law.harvard.edu/rss/skipHoursDays.html#skipdays).
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+
+			<!-- RSS items -->
+			<xsd:element name="item" type="Item" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Email address pattern -->
+	<xsd:simpleType name="EmailAddress">
+		<xsd:annotation>
+			<xsd:documentation>
+				Using the regexp definiton of E-Mail Address by Lucadean from the .NET RegExp
+				Pattern Repository at http://www.3leaf.com/default/NetRegExpRepository.aspx
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="([a-zA-Z0-9_\-])([a-zA-Z0-9_\-\.]*)@(\[((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}|((([a-zA-Z0-9\-]+)\.)+))([a-zA-Z]{2,}|(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\])"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<!-- RFC822 date/time specification -->
+	<xsd:simpleType name="RFC822_DateTimeSpec">
+		<xsd:annotation>
+			<xsd:documentation>
+				Using the regexp definiton of rfc-822 date by Sam Ruby at http://www.intertwingly.net/blog/1360.html
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="(((Mon)|(Tue)|(Wed)|(Thu)|(Fri)|(Sat)|(Sun)), *)?\d\d? +((Jan)|(Feb)|(Mar)|(Apr)|(May)|(Jun)|(Jul)|(Aug)|(Sep)|(Oct)|(Nov)|(Dec)) +\d\d(\d\d)? +\d\d:\d\d(:\d\d)? +(([+\-]?\d\d\d\d)|(UT)|(GMT)|(EST)|(EDT)|(CST)|(CDT)|(MST)|(MDT)|(PST)|(PDT)|\w)"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<!-- RSS category -->
+	<xsd:complexType name="Category">
+		<xsd:annotation>
+			<xsd:documentation>
+				The value of the element is a forward-slash-separated string that identifies a
+				hierarchic location in the indicated taxonomy. Processors may establish conventions
+				for the interpretation of categories. Two examples are provided below:
+				
+				&lt;category&gt;Grateful Dead&lt;/category&gt;
+				&lt;category domain="http://www.fool.com/cusips"&gt;MSFT&lt;/category&gt;
+				
+				You may include as many category elements as you need to, for different domains,
+				and to have an item cross-referenced in different parts of the same domain.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="domain" type="xsd:anyURI"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<!-- RSS cloud definition -->
+	<xsd:complexType name="Cloud">
+		<xsd:annotation>
+			<xsd:documentation>
+				A full explanation of this element and the rssCloud interface is here
+				(http://cyber.law.harvard.edu/rss/soapMeetsRss.html#rsscloudInterface).
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="domain" type="xsd:string"/>
+		<xsd:attribute name="port" type="xsd:positiveInteger" use="required"/>
+		<xsd:attribute name="path" type="xsd:string" use="required"/>
+		<xsd:attribute name="registerProcedure" type="xsd:string" use="required"/>
+		<xsd:attribute name="protocol" type="CloudProtocol" use="required"/>
+	</xsd:complexType>
+
+	<xsd:simpleType name="CloudProtocol">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="xml-rpc"/>
+			<xsd:enumeration value="http-post"/>
+			<xsd:enumeration value="soap"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<!-- RSS channel image -->
+	<xsd:complexType name="Image">
+		<xsd:sequence>
+			<xsd:element name="url" type="xsd:anyURI">
+				<xsd:annotation>
+					<xsd:documentation>
+						The URL of a GIF, JPEG or PNG image that represents the channel. 
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="title" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						Describes the image, it's used in the ALT attribute of the HTML &lt;img&gt;
+						tag when the channel is rendered in HTML. 
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="link" type="xsd:anyURI">
+				<xsd:annotation>
+					<xsd:documentation>
+						The URL of the site, when the channel is rendered, the image is a link to
+						the site. (Note, in practice the image &lt;title&gt; and &lt;link&gt;
+						should have the same value as the channel's &lt;title&gt; and &lt;link&gt;.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="width" minOccurs="0" default="88">
+				<xsd:annotation>
+					<xsd:documentation>
+						Width of the image in pixels.
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:nonNegativeInteger">
+						<xsd:maxInclusive value="144"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="height" minOccurs="0" default="31">
+				<xsd:annotation>
+					<xsd:documentation>
+						Height of the image in pixels.
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:nonNegativeInteger">
+						<xsd:maxInclusive value="400"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="description" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						Text that is included in the TITLE attribute of the link formed around the
+						image in the HTML rendering.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- RSS channel text input -->
+	<xsd:complexType name="TextInput">
+		<xsd:annotation>
+			<xsd:documentation>
+				The purpose of the &lt;textInput&gt; element is something of a mystery. You can use
+				it to specify a search engine box. Or to allow a reader to provide feedback. Most
+				aggregators ignore it.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="title" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						The label of the Submit button in the text input area.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="description" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						Explains the text input area.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="name" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						The name of the text object in the text input area.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="link" type="xsd:anyURI">
+				<xsd:annotation>
+					<xsd:documentation>
+						The URL of the CGI script that processes text input requests.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- RSS channel skip hours -->
+	<xsd:complexType name="SkipHours">
+		<xsd:sequence>
+			<xsd:element name="hour" minOccurs="0" maxOccurs="24">
+				<xsd:annotation>
+					<xsd:documentation>
+						A number between 0 and 23, representing a time in GMT, when aggregators,
+						if they support the feature, may not read the channel on hours listed in
+						the skipHours element. The hour beginning at midnight is hour zero.
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:nonNegativeInteger">
+						<xsd:minInclusive value="0"/>
+						<xsd:maxInclusive value="23"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- RSS channel skip days -->
+	<xsd:complexType name="SkipDays">
+		<xsd:sequence>
+			<xsd:element name="day" minOccurs="0" maxOccurs="7">
+				<xsd:annotation>
+					<xsd:documentation>
+						Monday, Tuesday, Wednesday, Thursday, Friday, Saturday or Sunday.
+						Aggregators may not read the channel during days listed in the skipDays
+						element.
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="Monday"/>
+						<xsd:enumeration value="Tuesday"/>
+						<xsd:enumeration value="Wednesday"/>
+						<xsd:enumeration value="Thursday"/>
+						<xsd:enumeration value="Friday"/>
+						<xsd:enumeration value="Saturday"/>
+						<xsd:enumeration value="Sunday"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- RSS item -->
+	<xsd:complexType name="Item">
+		<xsd:annotation>
+			<xsd:documentation>
+				An item may represent a "story" -- much like a story in a newspaper or magazine; if
+				so its description is a synopsis of the story, and the link points to the full
+				story. An item may also be complete in itself, if so, the description contains the
+				text (entity-encoded HTML is allowed; see examples
+				(http://cyber.law.harvard.edu/rss/encodingDescriptions.html)), and the link and
+				title may be omitted. All elements of an item are optional, however at least one of
+				title or description must be present. 
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="title" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						The title of the item.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="link" type="xsd:anyURI" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						The URL of the item.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="description" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						The item synopsis.
+					</xsd:documentation>
+					<xsd:appinfo>
+						<jxb:property>
+							<jxb:baseType>
+								<xjc:javaType
+									adapter="nz.net.ultraq.jaxb.adapters.XMLCDataAdapter"
+									name="java.lang.String"/>
+							</jxb:baseType>
+						</jxb:property>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="author" type="EmailAddress" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						Email address of the author of the item. More
+						(http://cyber.law.harvard.edu/rss/rss.html#ltauthorgtSubelementOfLtitemgt).
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="category" type="Category" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+						Includes the item in one or more categories. More
+						(http://cyber.law.harvard.edu/rss/rss.html#ltcategorygtSubelementOfLtitemgt).
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="comments" type="xsd:anyURI" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						URL of a page for comments relating to the item. More
+						(http://cyber.law.harvard.edu/rss/rss.html#ltcommentsgtSubelementOfLtitemgt).
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="enclosure" type="Enclosure" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						Describes a media object that is attached to the item. More
+						(http://cyber.law.harvard.edu/rss/rss.html#ltenclosuregtSubelementOfLtitemgt).
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="guid" type="GUID" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						A string that uniquely identifies the item. More
+						(http://cyber.law.harvard.edu/rss/rss.html#ltguidgtSubelementOfLtitemgt).
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="pubDate" type="RFC822_DateTimeSpec" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						Indicates when the item was published. More
+						(http://cyber.law.harvard.edu/rss/rss.html#ltpubdategtSubelementOfLtitemgt).
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="source" type="Source" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						The RSS channel that the item came from. More
+						(http://cyber.law.harvard.edu/rss/rss.html#ltsourcegtSubelementOfLtitemgt).
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Item media attachment -->
+	<xsd:complexType name="Enclosure">
+		<xsd:attribute name="url" type="xsd:anyURI" use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+					Where the enclosure is located.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="length" type="xsd:nonNegativeInteger" use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+					How big it is in bytes.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="type" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+					A standard MIME type.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<!-- Item unique identifier -->
+	<xsd:complexType name="GUID">
+		<xsd:annotation>
+			<xsd:documentation>
+				Stands for globally unique identifier. It's a string that uniquely identifies the
+				item. When present, an aggregator may choose to use this string to determine if an
+				item is new.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:anyURI">
+				<xsd:attribute name="isPermaLink" type="xsd:boolean" default="true">
+					<xsd:annotation>
+						<xsd:documentation>
+							If the guid element has an attribute named "isPermaLink" with a value
+							of true, the reader may assume that it is a permalink to the item, that
+							is, a url that can be opened in a Web browser, that points to the full
+							item described by the &lt;item&gt; element.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<!-- Item source -->
+	<xsd:complexType name="Source">
+		<xsd:annotation>
+			<xsd:documentation>
+				Its value is the name of the RSS channel that the item came from, derived from its
+				&lt;title&gt;. It has one required attribute, url, which links to the XMLization of
+				the source.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="url" type="xsd:anyURI" use="required">
+					<xsd:annotation>
+						<xsd:documentation>
+							Links to the XMLization of the source.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+</xsd:schema>

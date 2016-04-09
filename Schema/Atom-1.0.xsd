@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	Atom 1.0 schema
+	===============
+
+	Partial Atom 1.0 schema for use within my RSS feed.
+-->
+
+<xsd:schema targetNamespace="http://www.w3.org/2005/Atom"
+	xmlns="http://www.w3.org/2005/Atom"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<!-- Atom link element -->
+	<xsd:complexType name="Link">
+		<xsd:attribute name="href" type="xsd:anyURI" use="required"/>
+		<xsd:attribute name="rel" type="xsd:string" use="required"/>
+		<xsd:attribute name="type" type="MediaType" use="required"/>
+		<xsd:attribute name="hreflang" type="xsd:language"/>
+		<xsd:attribute name="title" type="xsd:string"/>
+		<xsd:attribute name="length" type="xsd:string"/>
+	</xsd:complexType>
+
+	<!-- Media type -->
+	<xsd:simpleType name="MediaType">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="\w*/\w*"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+</xsd:schema>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	Dublin Core 1.4 schema
+	======================
+
+	Partial Dublin Core 1.4 schema for use within my RSS feed.
+	
+	NOTE: This doesn't actually generate any JAXB classes because creator is a
+		  simple type.  The code is in the actual RSS generation.
+-->
+
+<xsd:schema targetNamespace="http://purl.org/dc/elements/1.1/"
+	xmlns="http://purl.org/dc/elements/1.1/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<!-- Creator element -->
+	<xsd:simpleType name="Creator">
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+
+</xsd:schema>

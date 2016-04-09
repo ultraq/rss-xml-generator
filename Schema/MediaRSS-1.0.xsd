@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	Media RSS 1.0 schema
+	====================
+
+	Schema compliant to the Media RSS 1.1.2 specification available here:
+	http://search.yahoo.com/mrss
+-->
+
+<xsd:schema targetNamespace="http://search.yahoo.com/mrss/"
+	xmlns="http://search.yahoo.com/mrss/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<!-- Media group -->
+	<xsd:complexType name="Group">
+		<xsd:annotation>
+			<xsd:documentation>
+				A sub-element of &lt;item&gt;. It allows grouping of &lt;media:content&gt; elements
+				that are effectively the same content, yet different representations. For instance:
+				the same song recorded in both the WAV and MP3 format. It's an optional element
+				that must only be used for this purpose.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:group ref="OptionalElements"/>
+	</xsd:complexType>
+
+	<!-- Media content -->
+	<xsd:complexType name="Content">
+		<xsd:annotation>
+			<xsd:documentation>
+				A sub-element of either &lt;item&gt; or &lt;media:group&gt;. Media objects that are
+				not the same content should not be included in the same &lt;media:group&gt;
+				element. The sequence of these items implies the order of presentation. While many
+				of the attributes appear to be audio/video specific, this element can be used to
+				publish any type of media. It contains 14 attributes, most of which are optional.
+
+				Optional attributes, along with the optional elements below, contain the primary
+				metadata entries needed to index and organize media content. Additional supported
+				attributes for describing images, audio, and video may be added in future revisions
+				of this document.
+
+				Note: While both &lt;media:content&gt; and &lt;media:group&gt; have no limitations
+				on the number of times they can appear, the general nature of RSS should be
+				preserved: an &lt;item&gt; represents a "story". Simply stated, this is similar to
+				the blog style of syndication. However, if one is using this module to strictly
+				publish media, there should be one &lt;item&gt; element for each media
+				object/group. This is to allow for proper attribution for the origination of the
+				media content through the &lt;link&gt; element. It also allows the full benefit of
+				the other RSS elements to be realized.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:group ref="OptionalElements"/>
+		<xsd:attribute name="url" type="xsd:anyURI">
+			<xsd:annotation>
+				<xsd:documentation>
+					The direct url to the media object. If not included, a &lt;media:player&gt;
+					element must be specified.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="fileSize" type="xsd:nonNegativeInteger">
+			<xsd:annotation>
+				<xsd:documentation>
+					The number of bytes of the media object. It is an optional attribute.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="type" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>
+					The standard MIME type of the object. It is an optional attribute.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="medium" type="ContentMedium">
+			<xsd:annotation>
+				<xsd:documentation>
+					The type of object (image | audio | video | document | executable). While this
+					attribute can at times seem redundant if type is supplied, it is included
+					because it simplifies decision making on the reader side, as well as flushes
+					out any ambiguities between MIME type and object type. It is an optional attribute.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="isDefault" type="xsd:boolean">
+			<xsd:annotation>
+				<xsd:documentation>
+					Determines if this is the default object that should be used for the
+					&lt;media:group&gt;. There should only be one default object per
+					&lt;media:group&gt;. It is an optional attribute.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="expression" type="ContentExpression" default="full">
+			<xsd:annotation>
+				<xsd:documentation>
+					Determines if the object is a sample or the full version of the object, or even
+					if it is a continuous stream (sample | full | nonstop). Default value is
+					'full'. It is an optional attribute.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="bitrate" type="xsd:nonNegativeInteger">
+			<xsd:annotation>
+				<xsd:documentation>
+					The kilobits per second rate of media. It is an optional attribute.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="framerate" type="xsd:nonNegativeInteger">
+			<xsd:annotation>
+				<xsd:documentation>
+					The number of frames per second for the media object. It is an optional
+					attribute.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="samplingrate" type="xsd:nonNegativeInteger">
+			<xsd:annotation>
+				<xsd:documentation>
+					The number of samples per second taken to create the media object. It is
+					expressed in thousands of samples per second (kHz). It is an optional
+					attribute.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="channels" type="xsd:nonNegativeInteger">
+			<xsd:annotation>
+				<xsd:documentation>
+					Number of audio channels in the media object. It is an optional attribute. 
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="duration" type="xsd:nonNegativeInteger">
+			<xsd:annotation>
+				<xsd:documentation>
+					The number of seconds the media object plays. It is an optional attribute.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="height" type="xsd:nonNegativeInteger">
+			<xsd:annotation>
+				<xsd:documentation>
+					The height of the media object. It is an optional attribute.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="width" type="xsd:nonNegativeInteger">
+			<xsd:annotation>
+				<xsd:documentation>
+					The width of the media object. It is an optional attribute.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="lang" type="xsd:language">
+			<xsd:annotation>
+				<xsd:documentation>
+					The primary language encapsulated in the media object. Language codes possible
+					are detailed in RFC 3066. This attribute is used similar to the xml:lang
+					attribute detailed in the XML 1.0 Specification (Third Edition). It is an
+					optional attribute.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<!-- Media medium -->
+	<xsd:simpleType name="ContentMedium">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="image"/>
+			<xsd:enumeration value="audio"/>
+			<xsd:enumeration value="video"/>
+			<xsd:enumeration value="document"/>
+			<xsd:enumeration value="executable"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<!-- Media expression -->
+	<xsd:simpleType name="ContentExpression">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="sample"/>
+			<xsd:enumeration value="full"/>
+			<xsd:enumeration value="nonstop"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<!-- Optional elements -->
+	<xsd:group name="OptionalElements">
+		<xsd:annotation>
+			<xsd:documentation>
+				The following elements are optional and may appear as sub-elements of
+				&lt;channel&gt;, &lt;item&gt;, &lt;media:content&gt; and/or &lt;media:group&gt;.
+
+				When an element appears at a shallow level, such as &lt;channel&gt; or
+				&lt;item&gt;, it means that the element should be applied to every media object
+				within its scope.
+
+				Duplicated elements appearing at deeper levels of the document tree have higher
+				priority over other levels. For example, &lt;media:content&gt; level elements are
+				favored over &lt;item&gt; level elements. The priority level is listed from
+				strongest to weakest: &lt;media:content&gt;, &lt;media:group&gt;, &lt;item&gt;,
+				&lt;channel&gt;.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="rating" type="Rating" minOccurs="0"/>
+			<xsd:element name="title" type="Title" minOccurs="0"/>
+			<xsd:element name="description" type="Description" minOccurs="0"/>
+			<xsd:element name="keywords" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						Highly relevant keywords describing the media object with typically a
+						maximum of ten words. The keywords and phrases should be comma delimited.
+
+						&lt;media:keywords&gt;kitty, cat, big dog, yarn, fluffy&lt;/media:keywords&gt;
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="thumbnail" type="Thumbnail" minOccurs="0"/>
+			<xsd:element name="category" type="Category" minOccurs="0"/>
+			<xsd:element name="hash" type="Hash" minOccurs="0"/>
+			<xsd:element name="player" type="Player" minOccurs="0"/>
+			<xsd:element name="credit" type="Credit" minOccurs="0"/>
+			<xsd:element name="copyright" type="Copyright" minOccurs="0"/>
+			<xsd:element name="text" type="Text" minOccurs="0"/>
+			<xsd:element name="restriction" type="Restriction" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+
+	<!-- Rating -->
+	<xsd:complexType name="Rating">
+		<xsd:annotation>
+			<xsd:documentation>
+				This allows the permissible audience to be declared. If this element is not
+				included, it assumes that no restrictions are necessary. It has one optional
+				attribute.
+
+				&lt;media:rating scheme="urn:simple"&gt;adult&lt;/media:rating&gt;
+				&lt;media:rating scheme="urn:icra"&gt;r (cz 1 lz 1 nz 1 oz 1 vz 1)&lt;/media:rating&gt;
+				&lt;media:rating scheme="urn:mpaa"&gt;pg&lt;/media:rating&gt;
+				&lt;media:rating scheme="urn:v-chip"&gt;tv-y7-fv&lt;/media:rating&gt;
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="scheme" type="xsd:anyURI" default="urn:simple">
+					<xsd:annotation>
+						<xsd:documentation>
+							The URI that identifies the rating scheme. It is an optional attribute.
+							If this attribute is not included, the default scheme is urn:simple
+							(adult | nonadult).
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<!-- Title -->
+	<xsd:complexType name="Title">
+		<xsd:annotation>
+			<xsd:documentation>
+				The title of the particular media object. It has 1 optional attribute.
+
+				&lt;media:title type="plain"&gt;The Judy's - The Moo Song&lt;/media:title&gt;
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="type" type="Type" default="plain">
+					<xsd:annotation>
+						<xsd:documentation>
+							Specifies the type of text embedded. Possible values are either 'plain'
+							or 'html'. Default value is 'plain'. All html must be entity-encoded.
+							It is an optional attribute.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<!-- Description -->
+	<xsd:complexType name="Description">
+		<xsd:annotation>
+			<xsd:documentation>
+				Short description describing the media object typically a sentence in length. It
+				has 1 optional attribute.
+
+				&lt;media:description type="plain"&gt;This was some really bizarre band I listened
+				to as a young lad.&lt;/media:description&gt;
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="type" type="Type" default="plain">
+					<xsd:annotation>
+						<xsd:documentation>
+							Specifies the type of text embedded. Possible values are either 'plain'
+							or 'html'. Default value is 'plain'. All html must be entity-encoded.
+							It is an optional attribute.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<!-- Thumbnail -->
+	<xsd:complexType name="Thumbnail">
+		<xsd:annotation>
+			<xsd:documentation>
+				Allows particular images to be used as representative images for the media object.
+				If multiple thumbnails are included, and time coding is not at play, it is assumed
+				that the images are in order of importance. It has 1 required attribute and 3
+				optional attributes.
+
+				&lt;media:thumbnail url="http://www.foo.com/keyframe.jpg" width="75" height="50" time="12:05:01.123" /&gt;
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="url" type="xsd:anyURI" use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+					Specifies the url of the thumbnail. It is a required attribute.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="height" type="xsd:nonNegativeInteger">
+			<xsd:annotation>
+				<xsd:documentation>
+					Specifies the height of the thumbnail. It is an optional attribute.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="width" type="xsd:nonNegativeInteger">
+			<xsd:annotation>
+				<xsd:documentation>
+					Specifies the width of the thumbnail. It is an optional attribute.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="time" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>
+					Specifies the time offset in relation to the media object. Typically this is
+					used when creating multiple keyframes within a single video. The format for
+					this attribute should be in the DSM-CC's Normal Play Time (NTP) as used in RTSP
+					[RFC 2326 3.6 Normal Play Time
+					(http://www.ietf.org/rfc/rfc2326.txt)]. It is an optional attribute. 
+
+					Notes:
+					NTP has a second or subsecond resolution. It is specified as H:M:S.h
+					(npt-hhmmss) or S.h (npt-sec), where H=hours, M=minutes, S=second and
+					h=fractions of a second.
+					A possible alternative to NTP would be SMPTE. It is believed that NTP is
+					simpler and easier to use.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<!-- Category -->
+	<xsd:complexType name="Category">
+		<xsd:annotation>
+			<xsd:documentation>
+				Allows a taxonomy to be set that gives an indication of the type of media content,
+				and its particular contents. It has 2 optional attributes.
+
+				&lt;media:category scheme="http://search.yahoo.com/mrss/category_
+				schema"&gt;music/artist/album/song&lt;/media:category&gt;
+
+				&lt;media:category scheme="http://dmoz.org" label="Ace Ventura - Pet 
+				Detective"&gt;Arts/Movies/Titles/A/Ace_Ventura_Series/Ace_Ventura_
+				-_Pet_Detective&lt;/media:category&gt;
+
+				&lt;media:category scheme="urn:flickr:tags"&gt;ycantpark 
+				mobile&lt;/media:category&gt;
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="scheme" type="xsd:anyURI" default="http://search.yahoo.com/mrss/category_schema">
+					<xsd:annotation>
+						<xsd:documentation>
+							The URI that identifies the categorization scheme. It is an optional
+							attribute. If this attribute is not included, the default scheme is
+							'http://search.yahoo.com/mrss/category_schema'.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="label" type="xsd:string">
+					<xsd:annotation>
+						<xsd:documentation>
+							The human readable label that can be displayed in end user
+							applications. It is an optional attribute.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<!-- Hash -->
+	<xsd:complexType name="Hash">
+		<xsd:annotation>
+			<xsd:documentation>
+				This is the hash of the binary media file. It can appear multiple times as long as
+				each instance is a different algo. It has 1 optional attribute.
+
+        		&lt;media:hash algo="md5"&gt;dfdec888b72151965a34b4b59031290a&lt;/media:hash&gt;
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="algo" type="HashAlgorithm" default="md5"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<!-- Hash algorithms -->
+	<xsd:simpleType name="HashAlgorithm">
+		<xsd:annotation>
+			<xsd:documentation>
+				Indicates the algorithm used to create the hash. Possible values are 'md5' and
+				'sha-1'. Default value is 'md5'. It is an optional attribute. 
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="md5"/>
+			<xsd:enumeration value="sha-1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<!-- Player -->
+	<xsd:complexType name="Player">
+		<xsd:annotation>
+			<xsd:documentation>
+				Allows the media object to be accessed through a web browser media player console.
+				This element is required only if a direct media url attribute is not specified in
+				the &lt;media:content&gt; element. It has 1 required attribute, and 2 optional
+				attributes.
+
+				&lt;media:player url="http://www.foo.com/player?id=1111" height="200" width="400" /&gt;
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="url" type="xsd:anyURI" use="required">
+					<xsd:annotation>
+						<xsd:documentation>
+							The url of the player console that plays the media. It is a required
+							attribute.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="height" type="xsd:nonNegativeInteger">
+					<xsd:annotation>
+						<xsd:documentation>
+							The height of the browser window that the url should be opened in. It
+							is an optional attribute.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="width" type="xsd:nonNegativeInteger">
+					<xsd:annotation>
+						<xsd:documentation>
+							The width of the browser window that the url should be opened in. It
+							is an optional attribute.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<!-- Credit -->
+	<xsd:complexType name="Credit">
+		<xsd:annotation>
+			<xsd:documentation>
+				Notable entity and the contribution to the creation of the media object. Current
+				entities can include people, companies, locations, etc. Specific entities can have
+				multiple roles, and several entities can have the same role. These should appear
+				as distinct &lt;media:credit&gt; elements. It has 2 optional attributes.
+
+				&lt;media:credit role="producer" scheme="urn:ebu"&gt;entity name&lt;/media:credit&gt;
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="role" type="xsd:string">
+					<xsd:annotation>
+						<xsd:documentation>
+							Specifies the role the entity played. Must be lowercase. It is an
+							optional attribute.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="scheme" type="xsd:anyURI">
+					<xsd:annotation>
+						<xsd:documentation>
+							The URI that identifies the role scheme. It is an optional attribute.
+							If this attribute is not included, the default scheme is 'urn:ebu'.
+							See: European Broadcasting Union Role Codes.
+							(http://www.ebu.ch/en/technical/metadata/specifications/role_codes.php)
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<!-- Copyright -->
+	<xsd:complexType name="Copyright">
+		<xsd:annotation>
+			<xsd:documentation>
+				Copyright information for media object. It has 1 optional attribute.
+
+				&lt;media:copyright url="http://blah.com/additional-info.html"&gt;2005 FooBar Media&lt;/media:copyright&gt;
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="url" type="xsd:anyURI">
+					<xsd:annotation>
+						<xsd:documentation>
+							The url for a terms of use page or additional copyright information. If
+							the media is operating under a Creative Commons license, the Creative
+							Commons module should be used instead. It is an optional attribute.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<!-- Text -->
+	<xsd:complexType name="Text">
+		<xsd:annotation>
+			<xsd:documentation>
+				Allows the inclusion of a text transcript, closed captioning, or lyrics of the
+				media content. Many of these elements are permitted to provide a time series of
+				text. In such cases, it is encouraged, but not required, that the elements be
+				grouped by language and appear in time sequence order based on the start time.
+				Elements can have overlapping start and end times. It has 4 optional attributes.
+
+				&lt;media:text type="plain" lang="en" start="00:00:03.000" 
+				end="00:00:10.000"&gt; Oh, say, can you see&lt;/media:text&gt;
+				&lt;media:text type="plain" lang="en" start="00:00:10.000" 
+				end="00:00:17.000"&gt;By the dawn's early light&lt;/media:text&gt;
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="type" type="Type" default="plain">
+					<xsd:annotation>
+						<xsd:documentation>
+							Specifies the type of text embedded. Possible values are either 'plain'
+							or 'html'. Default value is 'plain'. All html must be entity-encoded.
+							It is an optional attribute.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="lang" type="xsd:language">
+					<xsd:annotation>
+						<xsd:documentation>
+							The primary language encapsulated in the media object. Language codes
+							possible are detailed in RFC 3066. This attribute is used similar to
+							the xml:lang attribute detailed in the XML 1.0 Specification (Third
+							Edition). It is an optional attribute.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="start" type="xsd:string">
+					<xsd:annotation>
+						<xsd:documentation>
+							Specifies the start time offset that the text starts being relevant to
+							the media object. An example of this would be for closed captioning. It
+							uses the NTP time code format (see: the time attribute used in
+							&lt;media:thumbnail&gt;).  It is an optional attribute.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="end" type="xsd:string">
+					<xsd:annotation>
+						<xsd:documentation>
+							Specifies the end time that the text is relevant. If this attribute is
+							not provided, and a start time is used, it is expected that the end
+							time is either the end of the clip or the start of the next
+							&lt;media:text&gt; element.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<!-- Restriction -->
+	<xsd:complexType name="Restriction">
+		<xsd:annotation>
+			<xsd:documentation>
+				Allows restrictions to be placed on the aggregator rendering the media in the feed.
+				Currently, restrictions are based on distributor (uri) and country codes. This
+				element is purely informational and no obligation can be assumed or implied. Only
+				one &lt;media:restriction&gt; element of the same type can be applied to a media
+				object - all others will be ignored. Entities in this element should be space
+				separated. To allow the producer to explicitly declare his/her intentions, two
+				literals are reserved: 'all', 'none'. These literals can only be used once. This
+				element has 1 required attribute, and 1 optional attribute (with strict
+				requirements for its exclusion).
+
+				&lt;media:restriction relationship="allow" type="country"&gt;au us&lt;/media:restriction&gt;
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="relationship" type="xsd:string" use="required">
+					<xsd:annotation>
+						<xsd:documentation>
+							Indicates the type of relationship that the restriction represents
+							(allow | deny). In the example above, the media object should only be
+							syndicated in Australia and the United States. It is a required
+							attribute.
+							
+							Note: If the "allow" element is empty and the type is relationship is
+							"allow", it is assumed that the empty list means "allow nobody" and the
+							media should not be syndicated.
+							
+							A more explicit method would be:
+
+							&lt;media:restriction relationship="allow" type="country"&gt;au us&lt;/media:restriction&gt;
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="type" type="RestrictionType">
+					<xsd:annotation>
+						<xsd:documentation>
+							Specifies the type of restriction (country | uri) that the media can be
+							syndicated. It is an optional attribute; however can only be excluded
+							when using one of the literal values "all" or "none".
+							
+							"country" allows restrictions to be placed based on country code.
+							[ISO 3166]
+
+							"uri" allows restrictions based on URI. Examples: urn:apple,
+							http://images.google.com, urn:yahoo, etc. 
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<!-- Restriction type -->
+	<xsd:simpleType name="RestrictionType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="country"/>
+			<xsd:enumeration value="uri"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<!-- Type -->
+	<xsd:simpleType name="Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="plain"/>
+			<xsd:enumeration value="html"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+</xsd:schema>
