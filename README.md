@@ -63,11 +63,3 @@ rssXmlGenerator.generate(channel, items, output)
 > are plenty more properties in the Channel, Image, and Item objects.  Check out
 > [the RSS spec](http://www.rssboard.org/rss-specification) for all the
 > available properties.
-
-
-Changelog
----------
-
-### 1.0.0
- - Initial release
-
