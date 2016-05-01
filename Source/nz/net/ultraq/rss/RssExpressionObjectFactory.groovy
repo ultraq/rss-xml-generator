@@ -1,12 +1,12 @@
-/* 
- * Copyright 2015, Emanuel Rabina (http://www.ultraq.net.nz/)
- * 
+/*
+ * Copyright 2016, Emanuel Rabina (http://www.ultraq.net.nz/)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,33 +16,35 @@
 
 package nz.net.ultraq.rss
 
-import org.thymeleaf.dialect.AbstractDialect
-import org.thymeleaf.dialect.IExpressionObjectDialect
+import org.thymeleaf.context.IExpressionContext
 import org.thymeleaf.expression.IExpressionObjectFactory
 
 /**
- * Dialect to add the RSS expression object for use in the RSS template.
- * 
  * @author Emanuel Rabina
  */
-class RssDialect extends AbstractDialect implements IExpressionObjectDialect {
+class RssExpressionObjectFactory implements IExpressionObjectFactory {
 
-	static final String DIALECT_PREFIX = 'rss'
+	static final String RSS_EXPRESSION_OBJECT_NAME = 'rss'
+
+	final Set<String> allExpressionObjectNames = [
+	  RSS_EXPRESSION_OBJECT_NAME
+	]
 
 	/**
-	 * Constructor, initializes this dialect.
+	 * {@inheritDoc}
 	 */
-	RssDialect() {
+	@Override
+	Object buildObject(IExpressionContext context, String expressionObjectName) {
 
-		super(DIALECT_PREFIX)
+		return expressionObjectName == RSS_EXPRESSION_OBJECT_NAME ? new RssExpressionObject() : null
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	IExpressionObjectFactory getExpressionObjectFactory() {
+	boolean isCacheable(String expressionObjectName) {
 
-		return new RssExpressionObjectFactory()
+		return expressionObjectName == RSS_EXPRESSION_OBJECT_NAME
 	}
 }

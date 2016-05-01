@@ -39,18 +39,18 @@ class Channel {
 	// Optional fields
 	String language
 	String copyright
-//	String managingEditor	// TODO
-//	String webMaster		// TODO
+//	String managingEditor // TODO
+//	String webMaster      // TODO
 	DateTime pubDate
 	DateTime lastBuildDate
-//	Category[] categories	// TODO
-//	String generator		// NOTE: Hardcoded
-//	String docs				// NOTE: Hardcoded
-//	Cloud cloud				// TODO
+//	Category[] categories // TODO
+//	String generator      // NOTE: Hardcoded
+//	String docs           // NOTE: Hardcoded
+//	Cloud cloud           // TODO
 	int ttl
 	Image image
-//	Rating rating			// NOTE: No longer relevant?
-//	TextInput textInput		// NOTE: no longer relevant?
-//	SkipHour[] skipHours	// TODO
-//	SkipDay[] skipDays		// TODO
+//	Rating rating         // NOTE: No longer relevant?
+//	TextInput textInput   // NOTE: no longer relevant?
+//	SkipHour[] skipHours  // TODO
+//	SkipDay[] skipDays    // TODO
 }
