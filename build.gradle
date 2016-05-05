@@ -16,9 +16,9 @@
 
 apply plugin: 'groovy'
 apply plugin: 'maven'
-apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/1.2.1/gradle-support.gradle'
-apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/1.2.1/maven-support.gradle'
-apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/1.2.1/bundle.gradle'
+apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/1.3.0/gradle-support.gradle'
+apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/1.3.0/maven-support.gradle'
+apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/1.3.0/bundle.gradle'
 
 //project.name = 'RSS XML Generator'
 project.description = 'Generate an XML document for an RSS feed'
@@ -35,6 +35,6 @@ dependencies {
 		'nz.net.ultraq.thymeleaf:thymeleaf-ifnotnull-dialect:2.0.0-SNAPSHOT',
 		'nz.net.ultraq.thymeleaf:thymeleaf-joda-dialect:2.0.0-SNAPSHOT',
 		'org.codehaus.groovy:groovy:2.4.6',
-		'org.thymeleaf:thymeleaf:3.0.0.BETA02'
+		'org.thymeleaf:thymeleaf:3.0.0.BETA03'
 	)
 }
