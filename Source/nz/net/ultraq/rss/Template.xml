@@ -21,7 +21,7 @@
 			<title th:text="*{title}"></title>
 			<link th:text="*{link}"></link>
 		</image>
-		<item th:each="item: ${items}" th:object="${item}">
+		<item th:each="item: *{items}" th:object="${item}">
 			<title th:utext="${#rss.generateCDATASection(item.title)}">Item title</title>
 			<link th:text="*{link}"></link>
 			<dc:creator ifnotnull:text="*{dcCreator}"></dc:creator>

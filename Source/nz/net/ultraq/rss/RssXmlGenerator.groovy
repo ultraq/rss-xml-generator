@@ -17,7 +17,6 @@
 package nz.net.ultraq.rss
 
 import nz.net.ultraq.rss.model.Channel
-import nz.net.ultraq.rss.model.Item
 import nz.net.ultraq.thymeleaf.IfNotNullDialect
 import nz.net.ultraq.thymeleaf.JodaDialect
 import org.thymeleaf.TemplateEngine
@@ -55,21 +54,17 @@ class RssXmlGenerator {
 	}
 
 	/**
-	 * Generate an RSS XML document for the given channel and items.
+	 * Generate an RSS XML document for the given channel.
 	 * 
 	 * @param channel RSS channel information.
-	 * @param items   List of items to include in the feed.
 	 * @param writer  Output stream to write the XML document to.
 	 */
-	void generate(Channel channel, List<Item> items, Writer writer) {
+	void generate(Channel channel, Writer writer) {
 
 		templateEngine.process('Template.xml', new Context(
 			variables: [
 				DATE_FORMAT_RFC822: DATE_FORMAT_RFC822,
-				channel: channel,
-				items: items.sort({ item1, item2 ->
-					return item2.pubDate <=> item1.pubDate
-				})
+				channel: channel
 			]
 		), writer)
 	}

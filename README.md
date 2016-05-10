@@ -31,9 +31,9 @@ Usage
 -----
 
 Create an instance of the `RssXmlGenerator`.  Then, whenever you need to create
-an RSS feed, provide a `Channel` (describes the RSS channel) and list of `Item`s
-(describes the things to publish) to the `generate` method.  You'll also need a
-`Writer` so that the generated XML has somewhere to go to.
+an RSS feed, provide a `Channel` (describes the RSS channel and its publishable
+items) to the `generate` method.  You'll also need a `Writer` so that the
+generated XML has somewhere to go to.
 
 ```groovy
 def channel = new Channel(
@@ -44,19 +44,19 @@ def channel = new Channel(
     url:   'http://www.mywebsite.com/images/website-icon.png',
     title: 'My Website News and Updates',
     link:  'http://www.mywebsite.com/'
-  )
-)
-def items = [
-  new Item(
-    title: 'My awesome blog post',
-    link:  'http://www.mywebsite.com/blog/awesome'
   ),
-  ...
-]
+  items: [
+     new Item(
+       title: 'My awesome blog post',
+       link:  'http://www.mywebsite.com/blog/awesome'
+     ),
+     ...
+   ]
+)
 def output = new StringWriter()
 
 def rssXmlGenerator = new RssXmlGenerator()
-rssXmlGenerator.generate(channel, items, output)
+rssXmlGenerator.generate(channel, output)
 ```
 
 > The example code above populates the minimum fields required by RSS.  There

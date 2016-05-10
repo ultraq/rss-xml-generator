@@ -53,4 +53,5 @@ class Channel {
 //	TextInput textInput   // NOTE: no longer relevant?
 //	SkipHour[] skipHours  // TODO
 //	SkipDay[] skipDays    // TODO
+	Item[] items
 }
