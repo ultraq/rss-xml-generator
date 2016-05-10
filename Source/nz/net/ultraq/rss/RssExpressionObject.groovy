@@ -25,7 +25,7 @@ class RssExpressionObject {
 
 	/**
 	 * Create a CDATA section around the given content, to be used in a
-	 * <tt>th:utext</tt> processor.
+	 * {@code th:utext} processor.
 	 * 
 	 * @param content
 	 * @return CDATA section consisting of the given content.

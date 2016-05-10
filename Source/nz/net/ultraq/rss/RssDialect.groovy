@@ -27,7 +27,7 @@ import org.thymeleaf.expression.IExpressionObjectFactory
  */
 class RssDialect extends AbstractDialect implements IExpressionObjectDialect {
 
-	static final String DIALECT_PREFIX = 'rss'
+	static final String DIALECT_PREFIX = 'RSS XML Generator'
 
 	/**
 	 * Constructor, initializes this dialect.
