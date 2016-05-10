@@ -27,7 +27,7 @@ project.sourceCompatibility = '1.7'
 
 project.group    = 'nz.net.ultraq.rss'
 project.artifact = 'rss-xml-generator'
-project.version  = '2.0.0-SNAPSHOT'
+project.version  = '2.0.0'
 project.year     = '2015'
 
 dependencies {
@@ -37,4 +37,8 @@ dependencies {
 		'org.codehaus.groovy:groovy:2.4.6',
 		'org.thymeleaf:thymeleaf:3.0.0.RELEASE'
 	)
+}
+
+groovydoc {
+	link('http://www.thymeleaf.org/apidocs/thymeleaf/3.0.0.RELEASE/', 'org.thymeleaf.')
 }
