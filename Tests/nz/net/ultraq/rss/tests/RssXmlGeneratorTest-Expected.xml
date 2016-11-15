@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	version="2.0">
+	<channel>
+		<title>My Website News and Updates</title>
+		<link>http://www.mywebsite.com/</link>
+		<description>All of the latest stuff from My Website</description>
+		<atom:link href="http://www.mywebsite.com/rss" rel="self" type="application/rss+xml"/>
+		<language>en</language>
+		<copyright>2016</copyright>
+		<pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+		<lastBuildDate>Fri, 01 Jan 2016 00:00:00 +0000</lastBuildDate>
+		<generator>RSS XML Generator - https://github.com/ultraq/rss-xml-generator</generator>
+		<docs>http://www.rssboard.org/rss-specification</docs>
+		<ttl>360</ttl>
+		<image>
+			<url>http://www.mywebsite.com/images/website-icon.png</url>
+			<title>My Website News and Updates</title>
+			<link>http://www.mywebsite.com/</link>
+		</image>
+		<item>
+			<title><![CDATA[My awesome blog post]]></title>
+			<link>http://www.mywebsite.com/blog/awesome</link>
+			<dc:creator>Yours truly</dc:creator>
+			<description><![CDATA[This post will blow your mind!]]></description>
+			<guid>http://www.mywebsite.com/blog/awesome</guid>
+			<pubDate>Sat, 02 Jan 2016 00:00:00 +0000</pubDate>
+		</item>
+	</channel>
+</rss>
