@@ -25,13 +25,14 @@ apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/2.1.0/gradl
 apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/2.1.0/maven-support.gradle'
 apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/2.1.0/bundle.gradle'
 
+//project.name = 'rss-xml-generator'
 project.description = 'Generate an XML document for an RSS feed'
 project.archivesBaseName = 'rss-xml-generator'
-project.sourceCompatibility = '1.7'
+project.sourceCompatibility = '1.8'
 
 project.group    = 'nz.net.ultraq.rss'
 project.artifact = 'rss-xml-generator'
-project.version  = '2.1.0'
+project.version  = '3.0.0-SNAPSHOT'
 project.year     = '2015'
 
 dependencies {
