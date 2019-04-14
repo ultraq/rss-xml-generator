@@ -17,7 +17,7 @@
 package nz.net.ultraq.rss.model
 
 import groovy.transform.Canonical
-import org.joda.time.DateTime
+import java.time.ZonedDateTime
 
 /**
  * Representation of a publishable item in the RSS feed.
@@ -37,5 +37,5 @@ class Item {
 	// Optional fields
 	String description
 	String guid
-	DateTime pubDate
+	ZonedDateTime pubDate
 }

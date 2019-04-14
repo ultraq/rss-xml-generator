@@ -16,9 +16,8 @@
 
 package nz.net.ultraq.rss.model
 
-import org.joda.time.DateTime
-
 import groovy.transform.Canonical
+import java.time.ZonedDateTime
 
 /**
  * Representation of the largely static parts of an RSS channel.
@@ -41,8 +40,8 @@ class Channel {
 	String copyright
 //	String managingEditor // TODO
 //	String webMaster      // TODO
-	DateTime pubDate
-	DateTime lastBuildDate
+	ZonedDateTime pubDate
+	ZonedDateTime lastBuildDate
 //	Category[] categories // TODO
 //	String generator      // NOTE: Hardcoded
 //	String docs           // NOTE: Hardcoded

@@ -11,8 +11,8 @@
 		<atom:link th:if="*{atomSelfLink}" th:href="*{atomSelfLink}" rel="self" type="application/rss+xml"/>
 		<language ifnotnull:text="*{language}"></language>
 		<copyright ifnotnull:text="*{copyright}"></copyright>
-		<pubDate ifnotnull:text="${#joda.format(channel.pubDate, DATE_FORMAT_RFC822)}"></pubDate>
-		<lastBuildDate ifnotnull:text="${#joda.format(channel.lastBuildDate, DATE_FORMAT_RFC822)}"></lastBuildDate>
+		<pubDate ifnotnull:text="${#temporals.format(channel.pubDate, DATE_FORMAT_RFC822)}"></pubDate>
+		<lastBuildDate ifnotnull:text="${#temporals.format(channel.lastBuildDate, DATE_FORMAT_RFC822)}"></lastBuildDate>
 		<generator>RSS XML Generator - https://github.com/ultraq/rss-xml-generator</generator>
 		<docs>http://www.rssboard.org/rss-specification</docs>
 		<ttl ifnotnull:text="*{ttl}"></ttl>
@@ -27,7 +27,7 @@
 			<dc:creator ifnotnull:text="*{dcCreator}"></dc:creator>
 			<description ifnotnull:utext="${#rss.generateCDATASection(item.description)}"></description>
 			<guid ifnotnull:text="${item.guid}"></guid>
-			<pubDate ifnotnull:text="${#joda.format(item.pubDate, DATE_FORMAT_RFC822)}"></pubDate>
+			<pubDate ifnotnull:text="${#temporals.format(item.pubDate, DATE_FORMAT_RFC822)}"></pubDate>
 		</item>
 	</channel>
 </rss>

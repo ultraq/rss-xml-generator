@@ -21,9 +21,10 @@ import nz.net.ultraq.rss.model.Channel
 import nz.net.ultraq.rss.model.Image
 import nz.net.ultraq.rss.model.Item
 
-import org.joda.time.DateTime
-import org.joda.time.DateTimeZone
 import org.junit.Test
+
+import java.time.ZoneOffset
+import java.time.ZonedDateTime
 
 /**
  * Tests for the overall output of the RSS XML Generator.
@@ -45,8 +46,8 @@ class RssXmlGeneratorTest {
 			atomSelfLink:  'http://www.mywebsite.com/rss',
 			language:      'en',
 			copyright:     '2016',
-			pubDate:       new DateTime(2016, 1, 1, 0, 0, 0, DateTimeZone.UTC),
-			lastBuildDate: new DateTime(2016, 1, 1, 0, 0, 0, DateTimeZone.UTC),
+			pubDate:       ZonedDateTime.of(2016, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC),
+			lastBuildDate: ZonedDateTime.of(2016, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC),
 			ttl:           360,
 			image: new Image(
 				url:   'http://www.mywebsite.com/images/website-icon.png',
@@ -60,7 +61,7 @@ class RssXmlGeneratorTest {
 					dcCreator:   'Yours truly',
 					description: 'This post will blow your mind!',
 					guid:        'http://www.mywebsite.com/blog/awesome',
-					pubDate:     new DateTime(2016, 1, 2, 0, 0, 0, DateTimeZone.UTC)
+					pubDate:     ZonedDateTime.of(2016, 1, 2, 0, 0, 0, 0, ZoneOffset.UTC)
 				)
 			]
 		)
