@@ -2,6 +2,12 @@
 Changelog
 =========
 
+### 3.0.0
+ - Drop support for Java 7
+   ([#2](https://github.com/ultraq/rss-xml-generator/issues/2))
+ - Swap Joda time for java.time
+   ([#3](https://github.com/ultraq/rss-xml-generator/issues/3))
+
 ### 2.1.0
  - Change RSS template to use, and thus output, Unix line ends
  - Update to Groovy 2.4.7

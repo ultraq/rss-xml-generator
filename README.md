@@ -14,14 +14,16 @@ Generate an XML document for an RSS feed.
 Installation
 ------------
 
-Minimum of Java 7 required.
+Minimum of Java 8 required.
 
 ### Standalone distribution
+
 Copy the JAR from [the latest release bundle](https://github.com/ultraq/rss-xml-generator/releases/latest),
 placing it in the classpath of your program, or build the project from the
 source code here on GitHub.
 
 ### For Maven and Maven-compatible dependency managers
+
 Add a dependency to your project with the following co-ordinates:
 
  - GroupId: `nz.net.ultraq.rss`
