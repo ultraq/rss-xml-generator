@@ -32,7 +32,7 @@ project.sourceCompatibility = '1.8'
 
 project.group    = 'nz.net.ultraq.rss'
 project.artifact = 'rss-xml-generator'
-project.version  = '3.0.0-SNAPSHOT'
+project.version  = '3.0.0'
 project.year     = '2015'
 
 dependencies {
