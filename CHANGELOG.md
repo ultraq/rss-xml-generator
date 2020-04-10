@@ -2,6 +2,10 @@
 Changelog
 =========
 
+### 3.1.0
+ - Upgrade Groovy to 2.5.8
+ - Upgrade If-Not-Null dialect to 3.0.0
+
 ### 3.0.0
  - Drop support for Java 7
    ([#2](https://github.com/ultraq/rss-xml-generator/issues/2))

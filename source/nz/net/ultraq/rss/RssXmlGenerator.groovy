@@ -17,7 +17,7 @@
 package nz.net.ultraq.rss
 
 import nz.net.ultraq.rss.model.Channel
-import nz.net.ultraq.thymeleaf.IfNotNullDialect
+import nz.net.ultraq.thymeleaf.ifnotnull.IfNotNullDialect
 import org.thymeleaf.TemplateEngine
 import org.thymeleaf.context.Context
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect
