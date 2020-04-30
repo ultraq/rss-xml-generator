@@ -2,11 +2,9 @@
 RSS XML Generator
 =================
 
-[![Build Status](https://travis-ci.org/ultraq/rss-xml-generator.svg)](https://travis-ci.org/ultraq/rss-xml-generator)
+[![Build Status](https://travis-ci.com/ultraq/rss-xml-generator.svg)](https://travis-ci.com/ultraq/rss-xml-generator)
 [![Coverage Status](https://coveralls.io/repos/github/ultraq/rss-xml-generator/badge.svg?branch=master)](https://coveralls.io/github/ultraq/rss-xml-generator?branch=master)
-[![GitHub Release](https://img.shields.io/github/release/ultraq/rss-xml-generator.svg?maxAge=3600)](https://github.com/ultraq/rss-xml-generator/releases/latest)
 [![Maven Central](https://img.shields.io/maven-central/v/nz.net.ultraq.rss/rss-xml-generator.svg?maxAge=3600)](http://search.maven.org/#search|ga|1|g%3A%22nz.net.ultraq.rss%22%20AND%20a%3A%22rss-xml-generator%22)
-[![License](https://img.shields.io/github/license/ultraq/rss-xml-generator.svg?maxAge=2592000)](https://github.com/ultraq/rss-xml-generator/blob/master/LICENSE.txt)
 
 Generate an XML document for an RSS feed.
 
@@ -16,19 +14,17 @@ Installation
 
 Minimum of Java 8 required.
 
-### Standalone distribution
-
-Copy the JAR from [the latest release bundle](https://github.com/ultraq/rss-xml-generator/releases/latest),
-placing it in the classpath of your program, or build the project from the
-source code here on GitHub.
-
 ### For Maven and Maven-compatible dependency managers
 
 Add a dependency to your project with the following co-ordinates:
 
  - GroupId: `nz.net.ultraq.rss`
  - ArtifactId: `rss-xml-generator`
- - Version: (as per the badges above)
+ - Version: `3.1.0-SNAPSHOT`
+
+Check the [project releases](https://github.com/ultraq/rss-xml-generator/releases)
+for a list of available versions.  Each release page also includes a
+downloadable JAR if you want to manually add it to your project classpath.
 
 
 Usage
