@@ -3,7 +3,7 @@ Changelog
 =========
 
 ### 3.1.0
- - Upgrade Groovy to 2.5.8
+ - Upgrade Groovy to 3.0.3
  - Upgrade If-Not-Null dialect to 3.0.0
 
 ### 3.0.0
