@@ -21,7 +21,7 @@ import nz.net.ultraq.rss.model.Channel
 import nz.net.ultraq.rss.model.Image
 import nz.net.ultraq.rss.model.Item
 
-import org.junit.Test
+import spock.lang.Specification
 
 import java.time.ZoneOffset
 import java.time.ZonedDateTime
@@ -31,47 +31,48 @@ import java.time.ZonedDateTime
  * 
  * @author Emanuel Rabina
  */
-class RssXmlGeneratorTest {
+class RssXmlGeneratorTest extends Specification {
 
 	/**
 	 * Basic string comparison of the resulting XML.
 	 */
-	@Test
-	void testOutputMatches() {
+	def testOutputMatches() {
+		given:
+			def channel = new Channel(
+				title:         'My Website News and Updates',
+				link:          'http://www.mywebsite.com/',
+				description:   'All of the latest stuff from My Website',
+				atomSelfLink:  'http://www.mywebsite.com/rss',
+				language:      'en',
+				copyright:     '2016',
+				pubDate:       ZonedDateTime.of(2016, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC),
+				lastBuildDate: ZonedDateTime.of(2016, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC),
+				ttl:           360,
+				image: new Image(
+					url:   'http://www.mywebsite.com/images/website-icon.png',
+					title: 'My Website News and Updates',
+					link:  'http://www.mywebsite.com/'
+				),
+				items: [
+					new Item(
+						title:       'My awesome blog post',
+						link:        'http://www.mywebsite.com/blog/awesome',
+						dcCreator:   'Yours truly',
+						description: 'This post will blow your mind!',
+						guid:        'http://www.mywebsite.com/blog/awesome',
+						pubDate:     ZonedDateTime.of(2016, 1, 2, 0, 0, 0, 0, ZoneOffset.UTC)
+					)
+				]
+			)
+			def stringWriter = new StringWriter()
+			def rssXmlGenerator = new RssXmlGenerator()
 
-		def channel = new Channel(
-			title:         'My Website News and Updates',
-			link:          'http://www.mywebsite.com/',
-			description:   'All of the latest stuff from My Website',
-			atomSelfLink:  'http://www.mywebsite.com/rss',
-			language:      'en',
-			copyright:     '2016',
-			pubDate:       ZonedDateTime.of(2016, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC),
-			lastBuildDate: ZonedDateTime.of(2016, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC),
-			ttl:           360,
-			image: new Image(
-				url:   'http://www.mywebsite.com/images/website-icon.png',
-				title: 'My Website News and Updates',
-				link:  'http://www.mywebsite.com/'
-			),
-			items: [
-				new Item(
-					title:       'My awesome blog post',
-					link:        'http://www.mywebsite.com/blog/awesome',
-					dcCreator:   'Yours truly',
-					description: 'This post will blow your mind!',
-					guid:        'http://www.mywebsite.com/blog/awesome',
-					pubDate:     ZonedDateTime.of(2016, 1, 2, 0, 0, 0, 0, ZoneOffset.UTC)
-				)
-			]
-		)
-		def stringWriter = new StringWriter()
+		when:
+			rssXmlGenerator.generate(channel, stringWriter)
+			def result = stringWriter.toString()
+			def expected = new File(this.class.getResource('RssXmlGeneratorTest-Expected.xml').toURI()).text
 
-		def rssXmlGenerator = new RssXmlGenerator()
-		rssXmlGenerator.generate(channel, stringWriter)
-
-		def result = stringWriter.toString()
-		def expected = new File(this.class.getResource('RssXmlGeneratorTest-Expected.xml').toURI()).text
-		assert result == expected
+		then:
+			result == expected
 	}
 }
