@@ -20,7 +20,7 @@ Add a dependency to your project with the following co-ordinates:
 
  - GroupId: `nz.net.ultraq.rss`
  - ArtifactId: `rss-xml-generator`
- - Version: `3.1.0-SNAPSHOT`
+ - Version: `3.1.0`
 
 Check the [project releases](https://github.com/ultraq/rss-xml-generator/releases)
 for a list of available versions.  Each release page also includes a
