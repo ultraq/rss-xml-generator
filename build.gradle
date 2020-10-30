@@ -15,28 +15,31 @@
  */
 
 plugins {
+	id 'java-library'
 	id 'groovy'
-//	id 'codenarc'
+	id 'codenarc'
 	id 'jacoco'
 	id 'com.github.kt3k.coveralls' version '2.10.1'
 	id 'distribution'
 	id 'maven-publish'
 }
-apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/3.1.2/gradle-support.gradle'
-apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/3.1.2/maven-publish-support.gradle'
+apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/3.2.1/gradle-support.gradle'
+apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/3.2.1/maven-publish-support.gradle'
 
 description = 'Generate an XML document for an RSS feed'
 sourceCompatibility = '1.8'
 
 group    = 'nz.net.ultraq.rss'
 artifact = 'rss-xml-generator'
-version  = '3.1.0'
+version  = '3.1.1'
 year     = '2015'
 
 dependencies {
+	api(
+		'org.codehaus.groovy:groovy:3.0.3',
+	)
 	implementation(
 		'nz.net.ultraq.thymeleaf:thymeleaf-ifnotnull-dialect:3.0.0',
-		'org.codehaus.groovy:groovy:3.0.3',
 		'org.thymeleaf:thymeleaf:3.0.11.RELEASE',
 		'org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE'
 	)
@@ -51,8 +54,4 @@ dependencies {
 
 groovydoc {
 	link('http://www.thymeleaf.org/apidocs/thymeleaf/3.0.11.RELEASE/', 'org.thymeleaf.')
-}
-
-test {
-	useJUnitPlatform()
 }
