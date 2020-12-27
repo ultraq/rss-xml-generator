@@ -31,7 +31,7 @@ sourceCompatibility = '1.8'
 
 group    = 'nz.net.ultraq.rss'
 artifact = 'rss-xml-generator'
-version  = '3.1.1'
+version  = '3.1.2-SNAPSHOT'
 year     = '2015'
 
 dependencies {
@@ -40,7 +40,7 @@ dependencies {
 	)
 	implementation(
 		'nz.net.ultraq.thymeleaf:thymeleaf-ifnotnull-dialect:3.0.0',
-		'org.thymeleaf:thymeleaf:3.0.11.RELEASE',
+		'org.thymeleaf:thymeleaf:3.0.12.RELEASE',
 		'org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE'
 	)
 	testImplementation(
