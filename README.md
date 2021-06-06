@@ -2,7 +2,7 @@
 RSS XML Generator
 =================
 
-[![Build Status](https://travis-ci.com/ultraq/rss-xml-generator.svg)](https://travis-ci.com/ultraq/rss-xml-generator)
+[![Build Status](https://github.com/ultraq/rss-xml-generator/actions/workflows/build.yml/badge.svg)](https://github.com/ultraq/rss-xml-generator/actions)
 [![Coverage Status](https://coveralls.io/repos/github/ultraq/rss-xml-generator/badge.svg?branch=main)](https://coveralls.io/github/ultraq/rss-xml-generator?branch=main)
 [![Maven Central](https://img.shields.io/maven-central/v/nz.net.ultraq.rss/rss-xml-generator.svg?maxAge=3600)](http://search.maven.org/#search|ga|1|g%3A%22nz.net.ultraq.rss%22%20AND%20a%3A%22rss-xml-generator%22)
 
