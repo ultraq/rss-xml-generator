@@ -23,8 +23,8 @@ plugins {
 	id 'distribution'
 	id 'maven-publish'
 }
-apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/3.2.1/gradle-support.gradle'
-apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/3.2.1/maven-publish-support.gradle'
+apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/3.4.0/gradle-support.gradle'
+apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/3.4.0/maven-publish-support.gradle'
 
 description = 'Generate an XML document for an RSS feed'
 sourceCompatibility = '1.8'
@@ -50,6 +50,10 @@ dependencies {
 	testRuntimeOnly(
 		'org.slf4j:slf4j-simple:1.7.30'
 	)
+}
+
+test {
+	useJUnitPlatform()
 }
 
 groovydoc {
