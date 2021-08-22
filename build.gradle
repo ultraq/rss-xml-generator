@@ -39,7 +39,7 @@ dependencies {
 		'org.codehaus.groovy:groovy:3.0.8',
 	)
 	implementation(
-		'nz.net.ultraq.thymeleaf:thymeleaf-ifnotnull-dialect:4.0.0-SNAPSHOT',
+		'nz.net.ultraq.thymeleaf:thymeleaf-ifnotnull-dialect:4.0.0',
 		'org.thymeleaf:thymeleaf:3.0.12.RELEASE',
 		'org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE'
 	)
