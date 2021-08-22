@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package nz.net.ultraq.rss.tests
+package nz.net.ultraq.rss
 
-import nz.net.ultraq.rss.RssXmlGenerator
 import nz.net.ultraq.rss.model.Channel
 import nz.net.ultraq.rss.model.Image
 import nz.net.ultraq.rss.model.Item
