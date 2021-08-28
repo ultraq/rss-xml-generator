@@ -2,6 +2,11 @@
 Changelog
 =========
 
+### 3.2.0
+ - Upgrade Groovy to 3.0.8
+ - Upgrade If-Not-Null dialect to 4.0.0
+ - Upgrade Thymeleaf to 3.0.12
+
 ### 3.1.1
  - Fix generated POM - Groovy is needed as a compile dependency
 
