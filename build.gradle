@@ -32,25 +32,21 @@ group = 'nz.net.ultraq.rss'
 year = '2015'
 
 dependencies {
-	api(
-		'org.codehaus.groovy:groovy:3.0.8',
-	)
-	implementation(
-		'nz.net.ultraq.thymeleaf:thymeleaf-ifnotnull-dialect:4.0.0',
-		'org.thymeleaf:thymeleaf:3.0.12.RELEASE',
-		'org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE'
-	)
-	testImplementation(
-		'org.codehaus.groovy:groovy-xml:3.0.8',
-		'org.spockframework:spock-core:2.0-groovy-3.0'
-	)
-	testRuntimeOnly(
-		'org.slf4j:slf4j-simple:1.7.32'
-	)
-}
+	api 'org.apache.groovy:groovy:4.0.0'
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-ifnotnull-dialect:4.1.0-SNAPSHOT'
+	implementation 'org.thymeleaf:thymeleaf:3.0.15.RELEASE'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE'
 
-compileGroovy {
-	groovyOptions.optimizationOptions.indy = true
+	codenarc('org.codenarc:CodeNarc:2.2.0') {
+		exclude group: 'org.codehaus.groovy'
+	}
+	codenarc 'org.apache.groovy:groovy-all:4.0.0'
+
+	testImplementation 'org.apache.groovy:groovy-xml:4.0.0'
+	testImplementation('org.spockframework:spock-core:2.1-groovy-3.0-SNAPSHOT') {
+		exclude module: 'groovy'
+	}
+	testRuntimeOnly 'org.slf4j:slf4j-simple:1.7.32'
 }
 
 test {
@@ -58,5 +54,5 @@ test {
 }
 
 groovydoc {
-	link('http://www.thymeleaf.org/apidocs/thymeleaf/3.0.12.RELEASE/', 'org.thymeleaf.')
+	link('https://www.thymeleaf.org/apidocs/thymeleaf/3.0.15.RELEASE/', 'org.thymeleaf.')
 }
