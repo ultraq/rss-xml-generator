@@ -19,20 +19,17 @@ plugins {
 	id 'groovy'
 	id 'codenarc'
 	id 'jacoco'
-	id 'com.github.kt3k.coveralls' version '2.10.1'
 	id 'distribution'
 	id 'maven-publish'
 }
-apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/3.4.0/gradle-support.gradle'
-apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/3.4.0/maven-publish-support.gradle'
+apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/4.0.0/gradle-support.gradle'
+apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/4.0.0/maven-publish-support.gradle'
 
 description = 'Generate an XML document for an RSS feed'
+version  = '3.3.0-SNAPSHOT'
 sourceCompatibility = '1.8'
-
-group    = 'nz.net.ultraq.rss'
-artifact = 'rss-xml-generator'
-version  = '3.2.0'
-year     = '2015'
+group = 'nz.net.ultraq.rss'
+year = '2015'
 
 dependencies {
 	api(
