@@ -2,6 +2,11 @@
 Changelog
 =========
 
+### 3.3.0
+ - Upgraded Groovy to 4.0.0
+ - The `javadoc` artifact in Maven downloads now includes this project's
+   groovydocs, which have been missing thus far
+
 ### 3.2.0
  - Upgrade Groovy to 3.0.8
  - Upgrade If-Not-Null dialect to 4.0.0

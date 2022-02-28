@@ -20,7 +20,7 @@ Add a dependency to your project with the following co-ordinates:
 
  - GroupId: `nz.net.ultraq.rss`
  - ArtifactId: `rss-xml-generator`
- - Version: `3.2.0`
+ - Version: `3.3.0`
 
 Check the [project releases](https://github.com/ultraq/rss-xml-generator/releases)
 for a list of available versions.  Each release page also includes a
@@ -63,3 +63,10 @@ rssXmlGenerator.generate(channel, output)
 > are plenty more properties in the Channel, Image, and Item objects.  Check out
 > [the RSS spec](http://www.rssboard.org/rss-specification) for all the
 > available properties.
+
+
+API
+---
+
+Browse the online groovydocs for all the class and method details here:
+https://javadoc.io/doc/nz.net.ultraq.rss/rss-xml-generator
