@@ -22,31 +22,26 @@ plugins {
 	id 'distribution'
 	id 'maven-publish'
 }
-apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/4.0.1/gradle-support.gradle'
-apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/4.0.1/maven-publish-support.gradle'
+apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/4.3.0/gradle-support.gradle'
+apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/4.3.0/maven-publish-support.gradle'
 
 description = 'Generate an XML document for an RSS feed'
-version  = '3.3.0'
-sourceCompatibility = '1.8'
+version  = '3.4.0-SNAPSHOT'
+sourceCompatibility = 1.8
 group = 'nz.net.ultraq.rss'
 year = '2015'
 
+def thymeleafVersion = '3.1.1.RELEASE'
+
 dependencies {
-	api 'org.apache.groovy:groovy:4.0.0'
+	api 'org.apache.groovy:groovy:4.0.6'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-ifnotnull-dialect:4.1.0'
-	implementation 'org.thymeleaf:thymeleaf:3.0.15.RELEASE'
-	implementation 'org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE'
+	implementation "org.thymeleaf:thymeleaf:${thymeleafVersion}"
 
-	codenarc('org.codenarc:CodeNarc:2.2.0') {
-		exclude group: 'org.codehaus.groovy'
-	}
-	codenarc 'org.apache.groovy:groovy-all:4.0.0'
-
-	testImplementation 'org.apache.groovy:groovy-xml:4.0.0'
-	testImplementation('org.spockframework:spock-core:2.2-M1-groovy-4.0') {
-		exclude module: 'groovy'
-	}
-	testRuntimeOnly 'org.slf4j:slf4j-simple:1.7.36'
+	codenarc 'org.codenarc:CodeNarc-Groovy4:3.1.0'
+	testImplementation 'org.apache.groovy:groovy-xml:4.0.6'
+	testImplementation 'org.spockframework:spock-core:2.3-groovy-4.0'
+	testRuntimeOnly 'org.slf4j:slf4j-simple:2.0.5'
 }
 
 test {
@@ -54,5 +49,5 @@ test {
 }
 
 groovydoc {
-	link('https://www.thymeleaf.org/apidocs/thymeleaf/3.0.15.RELEASE/', 'org.thymeleaf.')
+	link("https://www.thymeleaf.org/apidocs/thymeleaf/${thymeleafVersion}/", 'org.thymeleaf.')
 }

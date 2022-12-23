@@ -21,7 +21,6 @@ import nz.net.ultraq.thymeleaf.ifnotnulldialect.IfNotNullDialect
 
 import org.thymeleaf.TemplateEngine
 import org.thymeleaf.context.Context
-import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver
 
 /**
@@ -48,7 +47,6 @@ class RssXmlGenerator {
 			),
 			additionalDialects: [
 				new IfNotNullDialect(),
-				new Java8TimeDialect(),
 				new RssDialect()
 			]
 		)
